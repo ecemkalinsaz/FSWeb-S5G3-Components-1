@@ -115,3 +115,53 @@ const data = [
   Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
   Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
 */
+
+function haberYapici(haberData) {
+  const haber = document.createElement("div");
+  haber.classList.add('article');
+
+  const h2 = document.createElement("h2");
+  h2.textContent = haberData.baslik;
+
+  const tarih = document.createElement("p");
+  tarih.classList.add('tarih');
+  tarih.textContent = haberData.tarih;
+
+  const ilkParagraf = document.createElement("p");
+  ilkParagraf.textContent = haberData.ilkParagraf;
+
+  const ikinciParagraf = document.createElement("p");
+  ikinciParagraf.textContent = haberData.ikinciParagraf;
+
+  const ucuncuParagraf = document.createElement("p");
+  ucuncuParagraf.textContent = haberData.ucuncuParagraf;
+
+  const span = document.createElement("span");
+  span.classList.add('expandButton');
+  span.textContent = '+';
+
+  span.addEventListener('click', () => {
+    haber.classList.toggle('article-open');
+  });
+
+  haber.appendChild(h2);
+  haber.appendChild(tarih);
+  haber.appendChild(ilkParagraf);
+  haber.appendChild(ikinciParagraf);
+  haber.appendChild(ucuncuParagraf);
+  haber.appendChild(span);
+
+  return haber;
+}
+
+const articlesDiv = document.querySelector(".articles");
+
+// haberler dizisini döngüye sokun
+for (let i = 0; i < data.length; i++) {
+  
+  // her bir haber için bir div.article öğesi oluşturun
+  const haberDiv = haberYapici(data[i]);
+
+  // haberDiv'i div.articles öğesine ekleyin
+  articlesDiv.appendChild(haberDiv);
+}
